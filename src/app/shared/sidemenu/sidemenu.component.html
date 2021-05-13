@@ -1,0 +1,27 @@
+<h2>Template</h2>
+<hr />
+<ul class="list-group">
+  <li
+    *ngFor="let item of templateMenu"
+    class="list-group-item"
+    [routerLink]="[item.ruta]"
+    routerLinkActive="active"
+  >
+    {{ item.texto }}
+  </li>
+</ul>
+<br />
+<!-- Este script realiza un bucle for para repetir el list item en este caso de rellena con el array templateMmenu declarado en el sidemenu.componentes.ts -->
+
+<h2>Rective</h2>
+<hr />
+<ul class="list-group">
+  <li
+    *ngFor="let item of reactiveMenu"
+    class="list-group-item"
+    [routerLink]="[item.ruta]"
+    routerLinkActive="active"
+  >
+    {{ item.texto }}
+  </li>
+</ul>

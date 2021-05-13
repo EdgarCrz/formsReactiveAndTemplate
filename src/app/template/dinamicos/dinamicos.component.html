@@ -1,0 +1,103 @@
+<h2>Template: <small>Dinámicos</small></h2>
+<hr />
+
+<form (ngSubmit)="guardar()" autocomplete="off" #miFormulario="ngForm">
+  <!-- (ngSubmit)="" -->
+  <!-- este formulario se le pone una referencia local "#miFormulario" y le indicamos que se va a manejar con ngForm(formularios de angular) -->
+  <!-- nombre -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <!-- label: solo es un texto que se asocia a un input o a un formulario, (es el texto que indica que es lo que tienes que ingresar) -->
+
+    <div class="col-sm-9">
+      <input
+        class="form-control"
+        placeholder="Nombre de la persona"
+        [ngModel]="persona.nombre"
+        name="nombre"
+        required
+      />
+      <!-- [ngModel]: en caja significa una referencia hacia nuestro ts -->
+      <!--ngModel/name: Lo que esta directiva hace es guardar el valor que tenga la propiedad name y actualizar dicha propiedad si el usuario la cambia desde el input -->
+      <!--lenguaje comun: si el usuario ingresa algo, de inmediato eso se va a ir llenando en el "name" y de igual forma se va actualizando -->
+      <span
+        class="form-text text-danger"
+        *ngIf="
+          miFormulario.controls.nombre?.errors &&
+          miFormulario.controls.nombre?.touched
+        "
+        >Este campo es obligatorio</span
+      >
+      <!-- muestra este span si se cumplen las condiciones(si lo tocaron pero no lo llenaron y si tiene errores) -->
+    </div>
+  </div>
+
+  <!-- Agregar -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="Agregar favorito"
+          name="nuevoJuego"
+          [(ngModel)]="nuevoJuego"
+          (keyup.enter)="anadir()"
+        />
+        <!-- al iprimir enter se ejecutara es otro evento -->
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="anadir()"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- lista de juegos favoritos -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Favoritos</label>
+    <div class="col-sm-9">
+      <div
+        class="input-group"
+        *ngFor="let favorito of persona.favoritos; let i = index"
+      >
+        <input
+          class="form-control mb-1"
+          name="favorito_{{ i }}"
+          [(ngModel)]="favorito.nombre"
+          required
+        />
+        <button
+          class="btn btn-outline-danger mb-1"
+          type="button"
+          (click)="borrar(i)"
+        >
+          Eliminar
+        </button>
+      </div>
+      <!-- ngModel casi siempre ocupa name, asignarle un nombre a este input,  en este caso el nombre sera favorito_{{y en cada vuelta cambiar el nombre por el id}} -->
+
+      <!-- añadimos () para convertirlo en caja de bananas para no solo usar referencia si no tambien evento crendo two way data binding -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+        type="button"
+        class="btn btn-primary float-end"
+        (click)="guardar()"
+        [disabled]="miFormulario.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<span>
+  <pre>{{ persona | json }}</pre>
+</span>
