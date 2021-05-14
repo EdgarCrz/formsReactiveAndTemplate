@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+#pruebasGIT
+src/app/pruebaGit/
+src/app/pruebaGit2/
+src/app/pruebaGIT3.txt
+
+
