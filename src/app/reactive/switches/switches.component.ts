@@ -47,6 +47,9 @@ export class SwitchesComponent implements OnInit {
     delete formValue.condiciones;
     // borramos la propiedad condiciones, ya que en este objeto "persona" es diferente a "miFormulario"
     console.log(formValue);
+
+    console.log('Probando GIT');
+    console.log('hola');
   }
 }
 
